@@ -1,0 +1,28 @@
+# Ignore compiled python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore virtual environment directories
+venv/
+env/
+.env
+*.venv
+.pyenv
+
+# Ignore cache and temporary files
+*.cache
+*.log
+*.bak
+*.swp
+*.swo
+*.tmp
+
+# Ignore project-specific configuration files (if applicable)
+config.py
+config.json
+.secret
