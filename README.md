@@ -1,7 +1,10 @@
-# Job Hunting Machine
+![Please-enter-a-title_-001](https://user-images.githubusercontent.com/87453411/228857059-6f2f4c79-bacf-43e0-b6da-6bb58c26abd1.png)
 
+# Project JAMGUN
+- Project : Sellenium-based job applying Python application
+- Character name : 잼군(JAMGUN, Job-Application-Machine Gun)
 - Purpose : Automate job applying job. Study CS more. 
-- Site : Intellipick
+- Site : job platform(Jumpit, Intellipick) in South Korea
 
 ## News
 - 2023-03-29 : basic scraping func success
