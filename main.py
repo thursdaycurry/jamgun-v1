@@ -70,7 +70,9 @@ scrolling = True
 
 # while scrolling:
 
+# for test
 for x in range(2):
+
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
     print('🦉 Moved to next scroll')
     time.sleep(3)
