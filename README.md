@@ -3,8 +3,8 @@
 # Project JAMGUN
 - Project : Sellenium-based job applying Python application
 - Character name : 잼군(JAMGUN, Job-Application-Machine Gun)
-- Purpose : Automate job applying job. Study CS more. 
-- Site : job platform(Jumpit, Intellipick) in South Korea
+- Purpose : Automate job applying job 
+- Target site : job platform(Jumpit, Intellipick) in South Korea
 
 ## News
 - 2023-03-29 : basic scraping func success
