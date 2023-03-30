@@ -14,6 +14,7 @@ from dotenv import load_dotenv
 load_dotenv()
 from datetime import date
 
+
 # Set up driver
 web_intelliPick = 'https://intellipick.spartacodingclub.kr/'
 # path = "/Users/thursdaycurry/Desktop/chromedriver_mac_arm64/chromedriver"
@@ -63,38 +64,39 @@ print('🦎 Success: final login button clicked')
 
 
 # 🦉 Listening Stage ----------------------------------------
+#
+# # Infinite Scroll until touch down to the bottom
+# last_height = driver.execute_script("return document.body.scrollHeight")
+# scrolling = True
+#
+# while scrolling:
+# # # for test
+# # for x in range(1):
 
+#
+# # Scroll down
+# driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+# print('🦉 Moved to next scroll')
+# time.sleep(3)
+#
+# # Get current height
+# new_height = driver.execute_script("return document.body.scrollHeight")
+#
+# # Compare current and last height
+# # If no difference, break loop because it is the bottom line
+# if new_height == last_height:
+#     scrolling = False
+#     break
+# else:
+#     last_height = new_height
 
-
-# Infinite Scroll until touch down to the bottom
-last_height = driver.execute_script("return document.body.scrollHeight")
-scrolling = True
-
-while scrolling:
-# # for test
-# for x in range(1):
-
-    # Scroll down
-    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-    print('🦉 Moved to next scroll')
-    time.sleep(3)
-
-    # Get current height
-    new_height = driver.execute_script("return document.body.scrollHeight")
-
-    # Compare current and last height
-    # If no difference, break loop because it is the bottom line
-    if new_height == last_height:
-        scrolling = False
-        break
-    else:
-        last_height = new_height
 
 # Get url resources and convert into url strings
 url_resources = WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.XPATH, "//a[contains(@href, '/companies-to-app')]")))
 url_list = [url.get_attribute('href') for url in url_resources]
 print('🦉 All urls are extracted')
 print(f'url_list len : {len(url_list)}')
+print(url_list)
 
 # Initialize data list
 company_data = []
@@ -104,14 +106,7 @@ location_data = []
 application_data = []
 appliedToday_data = []
 
-# counter
-counter = 0
-
-for url in url_list:
-
-    # Counter check
-    counter = counter + 1
-    print(f'no.{counter} ---------------------------')
+for url in url_list[1:3]:
 
     driver.get(url)
     profile_section = driver.find_elements_by_xpath("//aside")
@@ -133,37 +128,36 @@ for url in url_list:
     location_data.append(location_text)
     application_data.append(application_text)
 
-    """
-    target button types
-    - 입사 지원하기 : Green signal. click -> modal pop up -> '지원하기' click -> (moved to main page(auto))
-    - 지원 완료 : Red signal. button attr 'disabled' status
-    - 지원하러 가기 : Orange. You should go to another site
-    """
-    # In case of '입사 지원하기' which is applicable directly by single click
-    try:
-        if application_text == '입사 지원하기':
-            apply_modal_btn = driver.find_element_by_xpath("//button[contains(text(), '지원하기')]")
-            apply_modal_btn.click()
-            time.sleep(2)
+    print(company_data)
+    print(job_title_data)
+    print(job_contract_data)
+    print(location_data)
+    print(application_data)
 
-            apply_btn = driver.find_element_by_xpath("//button[text()='지원하기']")
-            apply_btn.click()
-            time.sleep(2)
-
-            appliedToday_data.append([company_text, job_title_text])
-            print('🔖 Your job application was send successfully!')
-    except:
-        print('입사 지원 불가')
-
-    time.sleep(2)
-
-print('✅ Scraping tasks are completed')
-
-print(len(company_data))
-print(len(job_title_data))
-print(len(job_contract_data))
-print(len(location_data))
-print(len(application_data))
+    # """
+    # target button types
+    # - 입사 지원하기 : Green signal. click -> modal pop up -> '지원하기' click -> (moved to main page(auto))
+    # - 지원 완료 : Red signal. button attr 'disabled' status
+    # - 지원하러 가기 : Orange. You should go to another site
+    # """
+    # # In case of '입사 지원하기' which is applicable directly by single click
+    # try:
+    #     if application_text == '입사 지원하기':
+    #         apply_modal_btn = driver.find_element_by_xpath("//button[contains(text(), '지원하기')]")
+    #         apply_modal_btn.click()
+    #         time.sleep(3)
+    #
+    #         apply_btn = driver.find_element_by_xpath("//button[text()='지원하기']")
+    #         apply_btn.click()
+    #         time.sleep(3)
+    #
+    #         appliedToday_data.append([company_text, job_title_text])
+    #         print('🔖 Your job application was send successfully!')
+    # except:
+    #     print('입사 지원 불가')
+    #
+    # print('---------------------')
+    # time.sleep(5)
 
 print('✅ Scraping tasks are completed')
 
@@ -183,6 +177,5 @@ df_jobPosts = pd.DataFrame({
     'application type': application_data,
 })
 
-# Create data file
 df_jobPosts.to_csv('data/data-' + str(date.today()) + '.csv', index=False)
 print(df_jobPosts)
