@@ -64,20 +64,25 @@ print('🦎 Success: final login button clicked')
 
 # 🦉 Listening Stage ----------------------------------------
 
+# for test
+# for x in range(2):
+
 # Infinite Scroll until touch down to the bottom
 last_height = driver.execute_script("return document.body.scrollHeight")
 scrolling = True
 
-# while scrolling:
+while scrolling:
 
-# for test
-for x in range(2):
-
+    # Scroll down
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
     print('🦉 Moved to next scroll')
     time.sleep(3)
+
+    # Get current height
     new_height = driver.execute_script("return document.body.scrollHeight")
 
+    # Compare current and last height
+    # If no difference, break loop because it is the bottom line
     if new_height == last_height:
         scrolling = False
         break
