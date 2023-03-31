@@ -11,8 +11,8 @@
 - 2023-03-30 : target site added(JUMPIT).
 
 ## Issues Solved
-- Scrap only 60 datas not all of the page(2023-03-30) -> solved different type of condition for while loop 
-- dataframe shows nothing(2023-03-30) -> fixed initiated twice to once  
+- scraping only limited number(60) of data not everything(2023-03-30) -> solved by changing while loop condition 
+- final df shows nothing(2023-03-30) -> fixed with removing duplicated initiating codes
 
 ## Who need this?
 - Job seekers who want to automate applying job
