@@ -2,15 +2,15 @@
 
 # Project JAMGUN
 - What : Sellenium-based job applying program
-- What is that animal : 잼군(JAMGUN, Job-Application-Machine Gun)
+- What is that character : 잼군(JAMGUN, Job-Application-Machine Gun)
 - Why : To collect job posting statistic data(+and automate job application)  
-- Target : job platform(Jumpit, Intellipick) in South Korea
+- Target : job platform([Jumpit](https://www.jumpit.co.kr/), [Intellipick](https://intellipick.spartacodingclub.kr/)) in South Korea
 
 ## News
 - 2023-03-29 : basic scraping func success
 - 2023-03-30 : target site added(JUMPIT).
 
-## Issues Solved
+## Troubleshooting
 - scraping only limited number(60) of data not everything(2023-03-30) -> solved by changing while loop condition 
 - final df shows nothing(2023-03-30) -> fixed with removing duplicated initiating codes
 
