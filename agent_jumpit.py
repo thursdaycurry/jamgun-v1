@@ -16,6 +16,10 @@ from dotenv import load_dotenv
 load_dotenv()
 from datetime import date
 
+# To send POST request to slack API
+import requests
+slack_url = os.environ.get('SLACK_WEBHOOK_URL')
+
 # Set up driver
 # Jumpit option : 경력 ~3년 / 서버/백엔드 개발자, 웹 풀스택 개발, 블록체인 / Node.js/Python/JS/BlockChain/Golang
 web = 'https://www.jumpit.co.kr/positions?jobCategory=1&jobCategory=3&jobCategory=22&career=3&techStack=Node.js&techStack=Python&techStack=JavaScript&techStack=Golang&techStack=Blockchain'
@@ -65,9 +69,9 @@ print('🦎 Success: Click next')
 last_height = driver.execute_script("return document.body.scrollHeight")
 scrolling = True
 
-while scrolling:
+# while scrolling:
 # for test
-# for x in range(3):
+for x in range(1):
 
     # Scroll down
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
@@ -108,8 +112,13 @@ counter_apply = 0
 
 for url in url_list:
 
-    if counter_apply == 30 :
+    # test
+    if counter_basic == 5:
+        print('멈추시오 여기서')
         break
+
+    # if counter_apply == 30 :
+    #     break
 
     # Counter check
     counter_basic += 1
@@ -182,7 +191,17 @@ df_jobPosts = pd.DataFrame({
     'appliedToday': appliedToday_data
 })
 
-
 # convert df into csv file
 df_jobPosts.to_csv('data/' + str(date.today()) + '-jumpit.csv', index=False)
 print(df_jobPosts)
+
+# Send result to Slack channel via Webhook
+msg = {"text":
+             "👽 JAMGUN report\n"
+           + str(date.today())
+           + f"\n확인한 구인공고 수 총 {len(company_data)}개 중 {counter_apply}개 기업에 지원했습니다."
+       }
+requests.post(slack_url, json=msg)
+
+print('---------------------')
+print('Code ended...')

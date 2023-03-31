@@ -22,6 +22,8 @@
 - You can automate job application tasks(2023-03-30, Intellipick, Jumpit)
 - You can get summary about jobs you applied in CSV file at `/data` directory.
 
+![Screenshot 2023-04-01 at 4 30 05 AM](https://user-images.githubusercontent.com/87453411/229212130-151fb54c-2ff8-480a-b936-ed6155032936.jpg)
+
 ## Check this out before using
 
 ### robots.txt
@@ -34,6 +36,7 @@ SPARTA_ID=<your-email>
 SPARTA_PASSWORD=<your-password>
 JUMPIT_ID=<your-email>
 JUMPIT_PASSWORD=<your-password>
+SLACK_WEBHOOK_URL=<your-slack-url>
 ```
 
 ### get proper driver
