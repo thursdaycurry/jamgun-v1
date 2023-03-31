@@ -65,9 +65,9 @@ print('🦎 Success: Click next')
 last_height = driver.execute_script("return document.body.scrollHeight")
 scrolling = True
 
-# while scrolling:
+while scrolling:
 # for test
-for x in range(3):
+# for x in range(3):
 
     # Scroll down
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
@@ -95,20 +95,25 @@ print(url_list)
 # Initialize data list
 company_data = []
 job_title_data = []
+appliedToday_data = []
 
 # job_contract_data = []
 # location_data = []
 # application_data = []
-# appliedToday_data = []
+
 
 # counter
-counter = 0
+counter_basic = 0
+counter_apply = 0
 
 for url in url_list:
 
+    if counter_apply == 30 :
+        break
+
     # Counter check
-    counter = counter + 1
-    print(f'no.{counter} ---------------------------')
+    counter_basic += 1
+    print(f'no.{counter_basic} ---------------------------')
 
     driver.get(url)
     time.sleep(4)
@@ -120,7 +125,8 @@ for url in url_list:
 
     company_text = result[1]
     job_title_text = result[0]
-    application_text = result[-3]
+    application_text = result[-3] # 버튼 내 지원하기/지원완료 여부 텍스트
+    isApplided = 0 # 지원여부 0 falsy, 1 truthy
 
     print(company_text)
     print(job_title_text)
@@ -128,15 +134,11 @@ for url in url_list:
     company_data.append(company_text)
     job_title_data.append(job_title_text)
 
-    # job_contract_data.append(job_contract_text)
-    # location_data.append(location_text)
-    # application_data.append(application_text)
 
     """
-    target button types
-    - 입사 지원하기 : Green signal. click -> modal pop up -> '지원하기' click -> (moved to main page(auto))
+    target button types (JUMPIT)
+    - 지원하기 : Green signal. click -> modal pop up -> '지원하기' click -> (moved to main page(auto))
     - 지원 완료 : Red signal. button attr 'disabled' status
-    - 지원하러 가기 : Orange. You should go to another site
     """
     # In case of '지원하기' which is applicable directly by single click(for JUMPIT)
     try:
@@ -156,39 +158,31 @@ for url in url_list:
             time.sleep(6)
 
             # appliedToday_data.append([company_text, job_title_text])
+            isApplided = 1
+            counter_apply += 1
             print('🔖 Your job application was send successfully!')
     except:
         print('입사 지원 불가')
 
+    appliedToday_data.append(isApplided)
     time.sleep(2)
 
 print('✅ Scraping tasks are completed')
 
 print(len(company_data))
 print(len(job_title_data))
-# print(len(job_contract_data))
-# print(len(location_data))
-# print(len(application_data))
-
-print('✅ Scraping tasks are completed')
-
-print(len(company_data))
-print(len(job_title_data))
-# print(len(job_contract_data))
-# print(len(location_data))
-# print(len(application_data))
+print(len(appliedToday_data))
 
 print('---------------------')
 
+# make pandas df
 df_jobPosts = pd.DataFrame({
     'company': company_data,
     'job_title': job_title_data,
+    'appliedToday': appliedToday_data
 })
 
-# 'job_contract': job_contract_data,
-# 'location': location_data,
-# 'application type': application_data,
 
-# Create data file
+# convert df into csv file
 df_jobPosts.to_csv('data/' + str(date.today()) + '-jumpit.csv', index=False)
 print(df_jobPosts)
