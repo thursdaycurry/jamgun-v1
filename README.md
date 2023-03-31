@@ -27,7 +27,7 @@
 ## Check this out before using
 
 ### robots.txt
-check '<target-website>/robots.txt' if it allows specific site to be scrapped.
+check '<target-website>/robots.txt' if scraping target page is allowed.
 
 ### set environment file
 create `.env` file in root directory and put your id, pw like below.
