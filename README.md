@@ -1,8 +1,8 @@
 ![Please-enter-a-title_-001](https://user-images.githubusercontent.com/87453411/228857059-6f2f4c79-bacf-43e0-b6da-6bb58c26abd1.png)
 
-# Project JAMGUN
+# Project JAMGUN(Job Application Machine Gun)
 - What : Sellenium-based job applying program
-- What is that character : 잼군(JAMGUN, Job-Application-Machine Gun)
+- What is that character : the character symbolize artillery soldier squirrel
 - Why : To collect job posting statistic data(+and automate job application)  
 - Target : job platform([Jumpit](https://www.jumpit.co.kr/), [Intellipick](https://intellipick.spartacodingclub.kr/)) in South Korea
 
